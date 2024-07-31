@@ -1,5 +1,5 @@
 {
-  "name": "salesforce_debug_log",
+  "name": "sflog",
   "rules": {
     "source_file": {
       "type": "SEQ",

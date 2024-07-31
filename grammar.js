@@ -1,5 +1,5 @@
 module.exports = grammar({
-  name: 'salesforce_debug_log',
+  name: 'sflog',
 
   rules: {
     source_file: $ => seq(
