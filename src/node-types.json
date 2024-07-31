@@ -15,11 +15,6 @@
     }
   },
   {
-    "type": "event_details",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "event_identifier",
     "named": true,
     "fields": {}
@@ -221,6 +216,10 @@
   },
   {
     "type": "component",
+    "named": true
+  },
+  {
+    "type": "event_details",
     "named": true
   },
   {

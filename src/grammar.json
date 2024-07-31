@@ -236,10 +236,6 @@
         {
           "type": "STRING",
           "value": "CUMULATIVE_LIMIT_USAGE_END"
-        },
-        {
-          "type": "PATTERN",
-          "value": ".+"
         }
       ]
     },

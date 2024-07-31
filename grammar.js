@@ -67,7 +67,7 @@ module.exports = grammar({
       'EXECUTION_FINISHED',
       'CUMULATIVE_LIMIT_USAGE',
       'CUMULATIVE_LIMIT_USAGE_END',
-      /.+/
+      ///.+/
     ),
 
     event_details: $ => /.+/,
