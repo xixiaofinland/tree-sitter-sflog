@@ -1,15 +1,30 @@
 module.exports = grammar({
   name: 'sflog',
-
   rules: {
     source_file: $ => seq(
-      optional($.log_header),
+      $.log_header,
       repeat($.log_entry)
     ),
 
-    log_header: $ => $.log_level_settings,
+    log_header: $ => seq(
+      $.version,
+      $.log_level_settings
+    ),
 
-    log_level_settings: $ => /.+/,
+    version: $ => /\d+\.\d+/,
+
+    log_level_settings: $ => repeat1(
+      seq(
+        $.component,
+        ',',
+        $.log_level,
+        optional(';')
+      )
+    ),
+
+    component: $ => /[A-Z_]+/,
+
+    log_level: $ => /[A-Z]+/,
 
     log_entry: $ => seq(
       $.timestamp,
@@ -20,33 +35,49 @@ module.exports = grammar({
 
     timestamp: $ => seq(
       $.time,
-      $.duration
+      optional($.duration)
     ),
 
-    time: $ => /\d{2}:\d{2}:\d{2}\.\d{3}/,
+    //time: $ => /\d{2}:\d{2}:\d{2}\.\d{1,3}(?=\s)/,
+    time: $ => /\d{2}:\d{2}:\d{2}\.\d{1,3}/,
 
     duration: $ => seq(
-      '(', $.number, ')'
+      /\s+/,  // Match one or more spaces
+      '(',
+      $.number,
+      ')'
     ),
 
-    event_identifier: $ => seq(
-      $.event_name,
-      optional($.line_number),
-      optional($.log_level)
+    event_identifier: $ => choice(
+      'USER_INFO',
+      'EXECUTION_STARTED',
+      'CODE_UNIT_STARTED',
+      'HEAP_ALLOCATE',
+      'VARIABLE_SCOPE_BEGIN',
+      'VARIABLE_ASSIGNMENT',
+      'STATEMENT_EXECUTE',
+      'SYSTEM_METHOD_ENTRY',
+      'SYSTEM_METHOD_EXIT',
+      'SOQL_EXECUTE_BEGIN',
+      'SOQL_EXECUTE_END',
+      'METHOD_ENTRY',
+      'METHOD_EXIT',
+      'CODE_UNIT_FINISHED',
+      'EXECUTION_FINISHED',
+      'CUMULATIVE_LIMIT_USAGE',
+      'CUMULATIVE_LIMIT_USAGE_END'
     ),
 
-    event_name: $ => /[A-Z_]+/,
+    event_details: $ => /.+/,
 
-    line_number: $ => seq(
+    code_location: $ => seq(
       '[',
       choice($.number, 'EXTERNAL'),
       ']'
     ),
 
-    log_level: $ => /[A-Z]+/,
-
-    event_details: $ => /.+/,
-
     number: $ => /\d+/,
+
+    string: $ => /[^|]+/,
   }
 });
