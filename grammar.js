@@ -47,6 +47,8 @@ module.exports = grammar({
     ),
 
     event_identifier: $ => choice(
+      'CALLOUT_RESPONSE',
+      'XDS_RESPONSE',
       'CALLOUT_REQUEST',
       'USER_INFO',
       'EXECUTION_STARTED',
@@ -64,19 +66,20 @@ module.exports = grammar({
       'CODE_UNIT_FINISHED',
       'EXECUTION_FINISHED',
       'CUMULATIVE_LIMIT_USAGE',
-      'CUMULATIVE_LIMIT_USAGE_END'
+      'CUMULATIVE_LIMIT_USAGE_END',
+      /.+/
     ),
 
     event_details: $ => /.+/,
 
-    code_location: $ => seq(
-      '[',
-      choice($.number, 'EXTERNAL'),
-      ']'
-    ),
+    //code_location: $ => seq(
+    //  '[',
+    //  choice($.number, 'EXTERNAL'),
+    //  ']'
+    //),
 
     number: $ => /\d+/,
 
-    string: $ => /[^|]+/,
+    //string: $ => /[^|]+/,
   }
 });

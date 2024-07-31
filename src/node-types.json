@@ -15,6 +15,11 @@
     }
   },
   {
+    "type": "event_details",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "event_identifier",
     "named": true,
     "fields": {}
@@ -139,6 +144,10 @@
     "named": false
   },
   {
+    "type": "CALLOUT_RESPONSE",
+    "named": false
+  },
+  {
     "type": "CODE_UNIT_FINISHED",
     "named": false
   },
@@ -160,10 +169,6 @@
   },
   {
     "type": "EXECUTION_STARTED",
-    "named": false
-  },
-  {
-    "type": "EXTERNAL",
     "named": false
   },
   {
@@ -211,19 +216,11 @@
     "named": false
   },
   {
-    "type": "[",
-    "named": false
-  },
-  {
-    "type": "]",
+    "type": "XDS_RESPONSE",
     "named": false
   },
   {
     "type": "component",
-    "named": true
-  },
-  {
-    "type": "event_details",
     "named": true
   },
   {

@@ -159,6 +159,14 @@
       "members": [
         {
           "type": "STRING",
+          "value": "CALLOUT_RESPONSE"
+        },
+        {
+          "type": "STRING",
+          "value": "XDS_RESPONSE"
+        },
+        {
+          "type": "STRING",
           "value": "CALLOUT_REQUEST"
         },
         {
@@ -228,6 +236,10 @@
         {
           "type": "STRING",
           "value": "CUMULATIVE_LIMIT_USAGE_END"
+        },
+        {
+          "type": "PATTERN",
+          "value": ".+"
         }
       ]
     },
@@ -235,39 +247,9 @@
       "type": "PATTERN",
       "value": ".+"
     },
-    "code_location": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "["
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "number"
-            },
-            {
-              "type": "STRING",
-              "value": "EXTERNAL"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": "]"
-        }
-      ]
-    },
     "number": {
       "type": "PATTERN",
       "value": "\\d+"
-    },
-    "string": {
-      "type": "PATTERN",
-      "value": "[^|]+"
     }
   },
   "extras": [
