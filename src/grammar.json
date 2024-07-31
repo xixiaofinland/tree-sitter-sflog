@@ -5,16 +5,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "log_header"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "log_header"
         },
         {
           "type": "REPEAT",
@@ -26,12 +18,61 @@
       ]
     },
     "log_header": {
-      "type": "SYMBOL",
-      "name": "log_level_settings"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "version"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "log_level_settings"
+        }
+      ]
+    },
+    "version": {
+      "type": "PATTERN",
+      "value": "\\d+\\.\\d+"
     },
     "log_level_settings": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "component"
+          },
+          {
+            "type": "STRING",
+            "value": ","
+          },
+          {
+            "type": "SYMBOL",
+            "name": "log_level"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "component": {
       "type": "PATTERN",
-      "value": ".+"
+      "value": "[A-Z_]+"
+    },
+    "log_level": {
+      "type": "PATTERN",
+      "value": "[A-Z]+"
     },
     "log_entry": {
       "type": "SEQ",
@@ -79,14 +120,22 @@
           "name": "time"
         },
         {
-          "type": "SYMBOL",
-          "name": "duration"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "duration"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
     "time": {
       "type": "PATTERN",
-      "value": "\\d{2}:\\d{2}:\\d{2}\\.\\d{3}"
+      "value": "\\d{2}:\\d{2}:\\d{2}\\.\\d{1,3}"
     },
     "duration": {
       "type": "SEQ",
@@ -106,43 +155,87 @@
       ]
     },
     "event_identifier": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "event_name"
+          "type": "STRING",
+          "value": "CALLOUT_REQUEST"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "line_number"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "STRING",
+          "value": "USER_INFO"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "log_level"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "STRING",
+          "value": "EXECUTION_STARTED"
+        },
+        {
+          "type": "STRING",
+          "value": "CODE_UNIT_STARTED"
+        },
+        {
+          "type": "STRING",
+          "value": "HEAP_ALLOCATE"
+        },
+        {
+          "type": "STRING",
+          "value": "VARIABLE_SCOPE_BEGIN"
+        },
+        {
+          "type": "STRING",
+          "value": "VARIABLE_ASSIGNMENT"
+        },
+        {
+          "type": "STRING",
+          "value": "STATEMENT_EXECUTE"
+        },
+        {
+          "type": "STRING",
+          "value": "SYSTEM_METHOD_ENTRY"
+        },
+        {
+          "type": "STRING",
+          "value": "SYSTEM_METHOD_EXIT"
+        },
+        {
+          "type": "STRING",
+          "value": "SOQL_EXECUTE_BEGIN"
+        },
+        {
+          "type": "STRING",
+          "value": "SOQL_EXECUTE_END"
+        },
+        {
+          "type": "STRING",
+          "value": "METHOD_ENTRY"
+        },
+        {
+          "type": "STRING",
+          "value": "METHOD_EXIT"
+        },
+        {
+          "type": "STRING",
+          "value": "CODE_UNIT_FINISHED"
+        },
+        {
+          "type": "STRING",
+          "value": "EXECUTION_FINISHED"
+        },
+        {
+          "type": "STRING",
+          "value": "CUMULATIVE_LIMIT_USAGE"
+        },
+        {
+          "type": "STRING",
+          "value": "CUMULATIVE_LIMIT_USAGE_END"
         }
       ]
     },
-    "event_name": {
+    "event_details": {
       "type": "PATTERN",
-      "value": "[A-Z_]+"
+      "value": ".+"
     },
-    "line_number": {
+    "code_location": {
       "type": "SEQ",
       "members": [
         {
@@ -168,17 +261,13 @@
         }
       ]
     },
-    "log_level": {
-      "type": "PATTERN",
-      "value": "[A-Z]+"
-    },
-    "event_details": {
-      "type": "PATTERN",
-      "value": ".+"
-    },
     "number": {
       "type": "PATTERN",
       "value": "\\d+"
+    },
+    "string": {
+      "type": "PATTERN",
+      "value": "[^|]+"
     }
   },
   "extras": [

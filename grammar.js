@@ -38,17 +38,16 @@ module.exports = grammar({
       optional($.duration)
     ),
 
-    //time: $ => /\d{2}:\d{2}:\d{2}\.\d{1,3}(?=\s)/,
     time: $ => /\d{2}:\d{2}:\d{2}\.\d{1,3}/,
 
     duration: $ => seq(
-      /\s+/,  // Match one or more spaces
       '(',
       $.number,
       ')'
     ),
 
     event_identifier: $ => choice(
+      'CALLOUT_REQUEST',
       'USER_INFO',
       'EXECUTION_STARTED',
       'CODE_UNIT_STARTED',
