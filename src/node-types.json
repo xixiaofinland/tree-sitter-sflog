@@ -1,5 +1,10 @@
 [
   {
+    "type": "component",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "duration",
     "named": true,
     "fields": {},
@@ -60,6 +65,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "log_level",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "log_level_settings",
@@ -135,6 +145,18 @@
     "named": false
   },
   {
+    "type": "APEX_CODE",
+    "named": false
+  },
+  {
+    "type": "APEX_PROFILING",
+    "named": false
+  },
+  {
+    "type": "CALLOUT",
+    "named": false
+  },
+  {
     "type": "CALLOUT_REQUEST",
     "named": false
   },
@@ -159,6 +181,18 @@
     "named": false
   },
   {
+    "type": "DB",
+    "named": false
+  },
+  {
+    "type": "DEBUG",
+    "named": false
+  },
+  {
+    "type": "ERROR",
+    "named": false
+  },
+  {
     "type": "EXECUTION_FINISHED",
     "named": false
   },
@@ -167,7 +201,23 @@
     "named": false
   },
   {
+    "type": "FINE",
+    "named": false
+  },
+  {
+    "type": "FINER",
+    "named": false
+  },
+  {
+    "type": "FINEST",
+    "named": false
+  },
+  {
     "type": "HEAP_ALLOCATE",
+    "named": false
+  },
+  {
+    "type": "INFO",
     "named": false
   },
   {
@@ -176,6 +226,14 @@
   },
   {
     "type": "METHOD_EXIT",
+    "named": false
+  },
+  {
+    "type": "NBA",
+    "named": false
+  },
+  {
+    "type": "NONE",
     "named": false
   },
   {
@@ -191,6 +249,10 @@
     "named": false
   },
   {
+    "type": "SYSTEM",
+    "named": false
+  },
+  {
     "type": "SYSTEM_METHOD_ENTRY",
     "named": false
   },
@@ -203,6 +265,10 @@
     "named": false
   },
   {
+    "type": "VALIDATION",
+    "named": false
+  },
+  {
     "type": "VARIABLE_ASSIGNMENT",
     "named": false
   },
@@ -211,19 +277,27 @@
     "named": false
   },
   {
+    "type": "VISUALFORCE",
+    "named": false
+  },
+  {
+    "type": "WARN",
+    "named": false
+  },
+  {
+    "type": "WAVE",
+    "named": false
+  },
+  {
+    "type": "WORKFLOW",
+    "named": false
+  },
+  {
     "type": "XDS_RESPONSE",
     "named": false
   },
   {
-    "type": "component",
-    "named": true
-  },
-  {
     "type": "event_details",
-    "named": true
-  },
-  {
-    "type": "log_level",
     "named": true
   },
   {

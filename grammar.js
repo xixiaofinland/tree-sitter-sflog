@@ -22,9 +22,31 @@ module.exports = grammar({
       )
     ),
 
-    component: $ => /[A-Z_]+/,
+    //component: $ => /[A-Z_]+/,
+    component: $ => choice(
+      'DB',
+      'WORKFLOW',
+      'NBA',
+      'VALIDATION',
+      'CALLOUT',
+      'APEX_CODE',
+      'APEX_PROFILING',
+      'VISUALFORCE',
+      'SYSTEM',
+      'WAVE'
+    ),
 
-    log_level: $ => /[A-Z]+/,
+    //log_level: $ => /[A-Z]+/,
+    log_level: $ => choice(
+      'NONE',
+      'ERROR',
+      'WARN',
+      'INFO',
+      'DEBUG',
+      'FINE',
+      'FINER',
+      'FINEST'
+    ),
 
     log_entry: $ => seq(
       $.timestamp,

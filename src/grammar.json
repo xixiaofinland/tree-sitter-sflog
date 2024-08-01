@@ -67,12 +67,86 @@
       }
     },
     "component": {
-      "type": "PATTERN",
-      "value": "[A-Z_]+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "DB"
+        },
+        {
+          "type": "STRING",
+          "value": "WORKFLOW"
+        },
+        {
+          "type": "STRING",
+          "value": "NBA"
+        },
+        {
+          "type": "STRING",
+          "value": "VALIDATION"
+        },
+        {
+          "type": "STRING",
+          "value": "CALLOUT"
+        },
+        {
+          "type": "STRING",
+          "value": "APEX_CODE"
+        },
+        {
+          "type": "STRING",
+          "value": "APEX_PROFILING"
+        },
+        {
+          "type": "STRING",
+          "value": "VISUALFORCE"
+        },
+        {
+          "type": "STRING",
+          "value": "SYSTEM"
+        },
+        {
+          "type": "STRING",
+          "value": "WAVE"
+        }
+      ]
     },
     "log_level": {
-      "type": "PATTERN",
-      "value": "[A-Z]+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "NONE"
+        },
+        {
+          "type": "STRING",
+          "value": "ERROR"
+        },
+        {
+          "type": "STRING",
+          "value": "WARN"
+        },
+        {
+          "type": "STRING",
+          "value": "INFO"
+        },
+        {
+          "type": "STRING",
+          "value": "DEBUG"
+        },
+        {
+          "type": "STRING",
+          "value": "FINE"
+        },
+        {
+          "type": "STRING",
+          "value": "FINER"
+        },
+        {
+          "type": "STRING",
+          "value": "FINEST"
+        }
+      ]
     },
     "log_entry": {
       "type": "SEQ",
