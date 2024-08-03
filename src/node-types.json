@@ -226,6 +226,10 @@
     "named": false
   },
   {
+    "type": "LIMIT_USAGE_FOR_NS",
+    "named": false
+  },
+  {
     "type": "METHOD_ENTRY",
     "named": false
   },

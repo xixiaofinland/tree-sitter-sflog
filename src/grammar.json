@@ -187,8 +187,47 @@
       ]
     },
     "event_details": {
-      "type": "PATTERN",
-      "value": ".+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^\\n]+"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\n]+"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "PATTERN",
+                        "value": "\\n"
+                      },
+                      {
+                        "type": "PATTERN",
+                        "value": "[^\\d\\n][^\\n]*"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "PATTERN",
+                    "value": "\\n"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
     },
     "timestamp": {
       "type": "SEQ",
@@ -316,8 +355,8 @@
           "value": "CUMULATIVE_LIMIT_USAGE_END"
         },
         {
-          "type": "PATTERN",
-          "value": ".+"
+          "type": "STRING",
+          "value": "LIMIT_USAGE_FOR_NS"
         }
       ]
     },

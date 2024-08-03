@@ -36,7 +36,6 @@ module.exports = grammar({
       'WAVE'
     ),
 
-    //log_level: $ => /[A-Z]+/,
     log_level: $ => choice(
       'NONE',
       'ERROR',
@@ -55,7 +54,30 @@ module.exports = grammar({
       optional(seq('|', $.event_details))
     ),
 
-    event_details: $ => /.+/,
+    event_details: $ => choice(
+      /[^\n]+/,
+      seq(
+        /[^\n]+/,
+        repeat1(
+          choice(
+            seq(/\n/, /[^\d\n][^\n]*/),  // Non-empty line not starting with a digit
+            /\n/  // Empty line
+          )
+        )
+      )
+    ),
+    //event_details: $ => choice(
+    //  /.+/,
+    //  seq(
+    //    /.*/,  // This allows for empty event details
+    //    repeat(
+    //      seq(
+    //        /\n/,
+    //        /[^0-9].*/  // Any line that doesn't start with a digit
+    //      )
+    //    )
+    //  )
+    //),
 
     timestamp: $ => seq(
       $.time,
@@ -91,7 +113,9 @@ module.exports = grammar({
       'EXECUTION_FINISHED',
       'CUMULATIVE_LIMIT_USAGE',
       'CUMULATIVE_LIMIT_USAGE_END',
-      /.+/
+      'LIMIT_USAGE_FOR_NS',
+      ///[^|]+/
+      ///.+/
     ),
 
     number: $ => /\d+/,
