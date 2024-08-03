@@ -94,14 +94,7 @@ module.exports = grammar({
 
     event_details: $ => /.+/,
 
-    //code_location: $ => seq(
-    //  '[',
-    //  choice($.number, 'EXTERNAL'),
-    //  ']'
-    //),
-
     number: $ => /\d+/,
 
-    //string: $ => /[^|]+/,
   }
 });
