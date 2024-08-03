@@ -186,6 +186,10 @@
         }
       ]
     },
+    "event_details": {
+      "type": "PATTERN",
+      "value": ".+"
+    },
     "timestamp": {
       "type": "SEQ",
       "members": [
@@ -310,12 +314,12 @@
         {
           "type": "STRING",
           "value": "CUMULATIVE_LIMIT_USAGE_END"
+        },
+        {
+          "type": "PATTERN",
+          "value": ".+"
         }
       ]
-    },
-    "event_details": {
-      "type": "PATTERN",
-      "value": ".+"
     },
     "number": {
       "type": "PATTERN",

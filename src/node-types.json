@@ -20,6 +20,11 @@
     }
   },
   {
+    "type": "event_details",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "event_identifier",
     "named": true,
     "fields": {}
@@ -295,10 +300,6 @@
   {
     "type": "XDS_RESPONSE",
     "named": false
-  },
-  {
-    "type": "event_details",
-    "named": true
   },
   {
     "type": "number",

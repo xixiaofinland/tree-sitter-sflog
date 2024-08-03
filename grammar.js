@@ -55,6 +55,8 @@ module.exports = grammar({
       optional(seq('|', $.event_details))
     ),
 
+    event_details: $ => /.+/,
+
     timestamp: $ => seq(
       $.time,
       optional($.duration)
@@ -89,10 +91,8 @@ module.exports = grammar({
       'EXECUTION_FINISHED',
       'CUMULATIVE_LIMIT_USAGE',
       'CUMULATIVE_LIMIT_USAGE_END',
-      ///.+/
+      /.+/
     ),
-
-    event_details: $ => /.+/,
 
     number: $ => /\d+/,
 
