@@ -54,30 +54,17 @@ module.exports = grammar({
       optional(seq('|', $.event_details))
     ),
 
-    event_details: $ => choice(
-      /[^\n]+/,
-      seq(
-        /[^\n]+/,
-        repeat1(
-          choice(
-            seq(/\n/, /[^\d\n][^\n]*/),  // Non-empty line not starting with a digit
-            /\n/  // Empty line
-          )
-        )
-      )
+    event_details: $ => repeat1(
+      seq($.event_detail, optional('|'))
     ),
-    //event_details: $ => choice(
-    //  /.+/,
-    //  seq(
-    //    /.*/,  // This allows for empty event details
-    //    repeat(
-    //      seq(
-    //        /\n/,
-    //        /[^0-9].*/  // Any line that doesn't start with a digit
-    //      )
-    //    )
-    //  )
-    //),
+
+    // how to define "event_detail"? logic:
+    // end by a `|` or the next new line starts with `timestamp` (i.e. reached a new log_entry)
+
+    //event_detail: $ => token(prec(1, repeat1(choice(
+    //  /[^|\n]+/,
+    //  seq('\n', /[^\d]{2}:\d{2}:\d{2}\.\d{1,3}/)
+    //)))),
 
     timestamp: $ => seq(
       $.time,

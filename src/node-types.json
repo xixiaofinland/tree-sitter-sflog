@@ -22,7 +22,17 @@
   {
     "type": "event_details",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "event_detail",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "event_identifier",
@@ -304,6 +314,10 @@
   {
     "type": "XDS_RESPONSE",
     "named": false
+  },
+  {
+    "type": "event_detail",
+    "named": true
   },
   {
     "type": "number",
