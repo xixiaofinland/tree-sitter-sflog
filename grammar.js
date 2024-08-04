@@ -24,7 +24,7 @@ module.exports = grammar({
         "APEX_PROFILING",
         "VISUALFORCE",
         "SYSTEM",
-        "WAVE"
+        "WAVE",
       ),
 
     log_level: ($) =>
@@ -36,7 +36,7 @@ module.exports = grammar({
         "DEBUG",
         "FINE",
         "FINER",
-        "FINEST"
+        "FINEST",
       ),
 
     anonymous_block: ($) => repeat1(seq(/[^\n]*: [^\n]*/)),
@@ -49,10 +49,10 @@ module.exports = grammar({
         optional(
           choice(
             seq(seq("|[", $.location, "]"), optional($.event_details)),
-            seq("|(", $.namespace, ")", "|", $.limit_usage),
-            $.event_details
-          )
-        )
+            seq("|(", $.namespace, ")|", $.limit_usage),
+            $.event_details,
+          ),
+        ),
       ),
 
     location: ($) => choice($.number, "EXTERNAL"),
@@ -64,7 +64,7 @@ module.exports = grammar({
         ":",
         field("consumed", $.number),
         "out of",
-        field("available", $.number)
+        field("available", $.number),
       ),
     event_details: ($) => repeat1($.event_detail),
     event_detail: ($) => prec.left(1, seq("|", $.event_detail_value)),
