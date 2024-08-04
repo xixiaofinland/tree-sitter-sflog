@@ -1,5 +1,10 @@
 [
   {
+    "type": "anonymous_block",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "component",
     "named": true,
     "fields": {}
@@ -14,6 +19,21 @@
       "types": [
         {
           "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "event_detail",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "event_detail_value",
           "named": true
         }
       ]
@@ -37,7 +57,83 @@
   {
     "type": "event_identifier",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "limit",
+    "named": true,
+    "fields": {
+      "available": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      },
+      "consumed": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "limit_usage",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "limit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "location",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "log_entry",
@@ -53,6 +149,18 @@
         },
         {
           "type": "event_identifier",
+          "named": true
+        },
+        {
+          "type": "limit_usage",
+          "named": true
+        },
+        {
+          "type": "location",
+          "named": true
+        },
+        {
+          "type": "namespace",
           "named": true
         },
         {
@@ -87,7 +195,7 @@
     "fields": {}
   },
   {
-    "type": "log_level_settings",
+    "type": "log_level_setting",
     "named": true,
     "fields": {},
     "children": {
@@ -106,6 +214,36 @@
     }
   },
   {
+    "type": "log_level_settings",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "log_level_setting",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "namespace",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -113,6 +251,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "anonymous_block",
+          "named": true
+        },
         {
           "type": "log_entry",
           "named": true
@@ -144,6 +286,14 @@
     }
   },
   {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\n  ",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -153,6 +303,10 @@
   },
   {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {
@@ -172,30 +326,6 @@
     "named": false
   },
   {
-    "type": "CALLOUT_REQUEST",
-    "named": false
-  },
-  {
-    "type": "CALLOUT_RESPONSE",
-    "named": false
-  },
-  {
-    "type": "CODE_UNIT_FINISHED",
-    "named": false
-  },
-  {
-    "type": "CODE_UNIT_STARTED",
-    "named": false
-  },
-  {
-    "type": "CUMULATIVE_LIMIT_USAGE",
-    "named": false
-  },
-  {
-    "type": "CUMULATIVE_LIMIT_USAGE_END",
-    "named": false
-  },
-  {
     "type": "DB",
     "named": false
   },
@@ -208,11 +338,7 @@
     "named": false
   },
   {
-    "type": "EXECUTION_FINISHED",
-    "named": false
-  },
-  {
-    "type": "EXECUTION_STARTED",
+    "type": "EXTERNAL",
     "named": false
   },
   {
@@ -228,23 +354,7 @@
     "named": false
   },
   {
-    "type": "HEAP_ALLOCATE",
-    "named": false
-  },
-  {
     "type": "INFO",
-    "named": false
-  },
-  {
-    "type": "LIMIT_USAGE_FOR_NS",
-    "named": false
-  },
-  {
-    "type": "METHOD_ENTRY",
-    "named": false
-  },
-  {
-    "type": "METHOD_EXIT",
     "named": false
   },
   {
@@ -256,43 +366,11 @@
     "named": false
   },
   {
-    "type": "SOQL_EXECUTE_BEGIN",
-    "named": false
-  },
-  {
-    "type": "SOQL_EXECUTE_END",
-    "named": false
-  },
-  {
-    "type": "STATEMENT_EXECUTE",
-    "named": false
-  },
-  {
     "type": "SYSTEM",
     "named": false
   },
   {
-    "type": "SYSTEM_METHOD_ENTRY",
-    "named": false
-  },
-  {
-    "type": "SYSTEM_METHOD_EXIT",
-    "named": false
-  },
-  {
-    "type": "USER_INFO",
-    "named": false
-  },
-  {
     "type": "VALIDATION",
-    "named": false
-  },
-  {
-    "type": "VARIABLE_ASSIGNMENT",
-    "named": false
-  },
-  {
-    "type": "VARIABLE_SCOPE_BEGIN",
     "named": false
   },
   {
@@ -312,16 +390,24 @@
     "named": false
   },
   {
-    "type": "XDS_RESPONSE",
+    "type": "]",
     "named": false
   },
   {
-    "type": "event_detail",
+    "type": "event_detail_value",
+    "named": true
+  },
+  {
+    "type": "identifier",
     "named": true
   },
   {
     "type": "number",
     "named": true
+  },
+  {
+    "type": "out of",
+    "named": false
   },
   {
     "type": "time",
@@ -333,6 +419,14 @@
   },
   {
     "type": "|",
+    "named": false
+  },
+  {
+    "type": "|(",
+    "named": false
+  },
+  {
+    "type": "|[",
     "named": false
   }
 ]

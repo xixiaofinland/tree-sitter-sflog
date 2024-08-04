@@ -1,111 +1,87 @@
 module.exports = grammar({
-  name: 'sflog',
+  name: "sflog",
   rules: {
-    source_file: $ => seq(
-      $.log_header,
-      repeat($.log_entry)
-    ),
+    source_file: ($) =>
+      seq($.log_header, optional($.anonymous_block), repeat($.log_entry)),
 
-    log_header: $ => seq(
-      $.version,
-      $.log_level_settings
-    ),
+    log_header: ($) => seq($.version, $.log_level_settings, "\n"),
 
-    version: $ => /\d+\.\d+/,
+    version: ($) => /\d+\.\d+/,
 
-    log_level_settings: $ => repeat1(
+    log_level_settings: ($) =>
+      repeat1(seq($.log_level_setting, optional("\n  "))),
+
+    log_level_setting: ($) => seq($.component, ",", $.log_level, optional(";")),
+
+    component: ($) =>
+      choice(
+        "DB",
+        "WORKFLOW",
+        "NBA",
+        "VALIDATION",
+        "CALLOUT",
+        "APEX_CODE",
+        "APEX_PROFILING",
+        "VISUALFORCE",
+        "SYSTEM",
+        "WAVE"
+      ),
+
+    log_level: ($) =>
+      choice(
+        "NONE",
+        "ERROR",
+        "WARN",
+        "INFO",
+        "DEBUG",
+        "FINE",
+        "FINER",
+        "FINEST"
+      ),
+
+    anonymous_block: ($) => repeat1(seq(/[^\n]*: [^\n]*/)),
+
+    log_entry: ($) =>
       seq(
-        $.component,
-        ',',
-        $.log_level,
-        optional(';')
-      )
-    ),
+        $.timestamp,
+        "|",
+        $.event_identifier,
+        optional(
+          choice(
+            seq(seq("|[", $.location, "]"), optional($.event_details)),
+            seq("|(", $.namespace, ")", "|", $.limit_usage),
+            $.event_details
+          )
+        )
+      ),
 
-    //component: $ => /[A-Z_]+/,
-    component: $ => choice(
-      'DB',
-      'WORKFLOW',
-      'NBA',
-      'VALIDATION',
-      'CALLOUT',
-      'APEX_CODE',
-      'APEX_PROFILING',
-      'VISUALFORCE',
-      'SYSTEM',
-      'WAVE'
-    ),
+    location: ($) => choice($.number, "EXTERNAL"),
+    namespace: ($) => $.identifier,
+    limit_usage: ($) => repeat1($.limit),
+    limit: ($) =>
+      seq(
+        field("name", alias(/[^:]+/, $.identifier)),
+        ":",
+        field("consumed", $.number),
+        "out of",
+        field("available", $.number)
+      ),
+    event_details: ($) => repeat1($.event_detail),
+    event_detail: ($) => prec.left(1, seq("|", $.event_detail_value)),
 
-    log_level: $ => choice(
-      'NONE',
-      'ERROR',
-      'WARN',
-      'INFO',
-      'DEBUG',
-      'FINE',
-      'FINER',
-      'FINEST'
-    ),
+    // TODO: this will need some handling for "|" in strings and other possible pattern breakers, this is the wild stuff
+    event_detail_value: ($) => token.immediate(repeat1(/(\n  )?[^\n|]+/)),
 
-    log_entry: $ => seq(
-      $.timestamp,
-      '|',
-      $.event_identifier,
-      optional(seq('|', $.event_details))
-    ),
+    timestamp: ($) => seq($.time, optional($.duration)),
 
-    event_details: $ => repeat1(
-      seq($.event_detail, optional('|'))
-    ),
+    time: ($) => /\d{2}:\d{2}:\d{2}\.\d{1,3}/,
 
-    // how to define "event_detail"? logic:
-    // end by a `|` or the next new line starts with `timestamp` (i.e. reached a new log_entry)
+    duration: ($) => seq("(", $.number, ")"),
 
-    //event_detail: $ => token(prec(1, repeat1(choice(
-    //  /[^|\n]+/,
-    //  seq('\n', /[^\d]{2}:\d{2}:\d{2}\.\d{1,3}/)
-    //)))),
+    event_identifier: ($) => $.identifier,
 
-    timestamp: $ => seq(
-      $.time,
-      optional($.duration)
-    ),
+    number: ($) => /\d+/,
 
-    time: $ => /\d{2}:\d{2}:\d{2}\.\d{1,3}/,
-
-    duration: $ => seq(
-      '(',
-      $.number,
-      ')'
-    ),
-
-    event_identifier: $ => choice(
-      'CALLOUT_RESPONSE',
-      'XDS_RESPONSE',
-      'CALLOUT_REQUEST',
-      'USER_INFO',
-      'EXECUTION_STARTED',
-      'CODE_UNIT_STARTED',
-      'HEAP_ALLOCATE',
-      'VARIABLE_SCOPE_BEGIN',
-      'VARIABLE_ASSIGNMENT',
-      'STATEMENT_EXECUTE',
-      'SYSTEM_METHOD_ENTRY',
-      'SYSTEM_METHOD_EXIT',
-      'SOQL_EXECUTE_BEGIN',
-      'SOQL_EXECUTE_END',
-      'METHOD_ENTRY',
-      'METHOD_EXIT',
-      'CODE_UNIT_FINISHED',
-      'EXECUTION_FINISHED',
-      'CUMULATIVE_LIMIT_USAGE',
-      'CUMULATIVE_LIMIT_USAGE_END',
-      'LIMIT_USAGE_FOR_NS',
-      ///[^|]+/
-      ///.+/
-    ),
-
-    number: $ => /\d+/,
-
-  }
+    identifier: ($) => /\w+/,
+  },
 });
