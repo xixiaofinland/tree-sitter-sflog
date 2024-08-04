@@ -58,18 +58,6 @@
           {
             "type": "SYMBOL",
             "name": "log_level_setting"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "\n  "
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
           }
         ]
       }
@@ -265,11 +253,7 @@
                     },
                     {
                       "type": "STRING",
-                      "value": ")"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "|"
+                      "value": ")|"
                     },
                     {
                       "type": "SYMBOL",
@@ -364,21 +348,17 @@
       }
     },
     "event_detail": {
-      "type": "PREC_LEFT",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "|"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "event_detail_value"
-          }
-        ]
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "|"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "event_detail_value"
+        }
+      ]
     },
     "event_detail_value": {
       "type": "IMMEDIATE_TOKEN",

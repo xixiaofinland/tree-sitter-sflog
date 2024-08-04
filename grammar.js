@@ -9,7 +9,7 @@ module.exports = grammar({
     version: ($) => /\d+\.\d+/,
 
     log_level_settings: ($) =>
-      repeat1(seq($.log_level_setting, optional("\n  "))),
+      repeat1(seq($.log_level_setting)),
 
     log_level_setting: ($) => seq($.component, ",", $.log_level, optional(";")),
 
@@ -67,7 +67,7 @@ module.exports = grammar({
         field("available", $.number),
       ),
     event_details: ($) => repeat1($.event_detail),
-    event_detail: ($) => prec.left(1, seq("|", $.event_detail_value)),
+    event_detail: ($) => seq("|", $.event_detail_value),
 
     // TODO: this will need some handling for "|" in strings and other possible pattern breakers, this is the wild stuff
     event_detail_value: ($) => token.immediate(repeat1(/(\n  )?[^\n|]+/)),
