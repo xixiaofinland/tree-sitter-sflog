@@ -8,8 +8,7 @@ module.exports = grammar({
 
     version: ($) => /\d+\.\d+/,
 
-    log_level_settings: ($) =>
-      repeat1(seq($.log_level_setting)),
+    log_level_settings: ($) => repeat1(seq($.log_level_setting)),
 
     log_level_setting: ($) => seq($.component, ",", $.log_level, optional(";")),
 
