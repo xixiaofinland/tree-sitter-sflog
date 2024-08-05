@@ -1,30 +1,22 @@
-;(event_identifier) @keyword
-(event_details) @string
-(log_level_settings) @comment
-
 ;; highlights.scm
 
-(version) @number
-
-(component) @constant
-
-(log_level) @constant
-
-(timestamp) @number
-(time) @number
-(duration) @number
-
-(event_identifier) @function
-
-(location) @constant
+(number) @number
+(identifier) @variable
+(version) @number.readonly
 (namespace) @namespace
 
 (limit) @property
-((limit (identifier) @property.name))
-((limit (number) @number))
+(limit (identifier) @string)
+(limit (number) @number)
 
-(event_detail_value) @string
+(duration (number) @number.readonly) @string
+(location (number) @number.readonly) @string
 
-(number) @number
+(event_detail (event_detail_value) @string)
 
-(identifier) @variable
+(log_level_settings) @comment
+(log_level_setting (component) @type)
+(log_level_setting (log_level) @constant)
+
+(log_entry (timestamp (time) @function) @number)
+(log_entry (event_identifier (identifier) @type) @keyword)
