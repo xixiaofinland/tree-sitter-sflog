@@ -70,11 +70,6 @@ DEBUG with object data
         (event_detail_value))
       (event_detail
         (event_detail_value))))
-  (ERROR
-    (ERROR)
-    (ERROR)
-    (ERROR)
-    (ERROR))
   (log_entry
     (timestamp
       (time)
